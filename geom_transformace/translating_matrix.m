@@ -1,0 +1,19 @@
+function T = translating_matrix(tx, ty, tz)
+
+%Vytvoøení translaèní matice T pro posun o [tx,ty,tz]
+%
+%Napøíklad:
+%Vytvoøení matice pro posun bodu A na na ose X o hodnotu 2 vpravo.
+%T  = translating_matrix(2, 0, 0)
+%Tt = T*A
+
+%%
+T = [1 0 0 tx;...
+     0 1 0 ty;...
+     0 0 1 tz;...
+     0 0 0 1];
+ 
+% T = [1 0 0 0;...
+%      0 1 0 0;...
+%      0 0 1 0;...
+%      tx ty tz 1];
