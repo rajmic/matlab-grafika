@@ -36,6 +36,7 @@ patch(plNear(:,1),plNear(:,2),plNear(:,3),'red');
 patch(plFar(:,1),plFar(:,2),plFar(:,3),'red');
 camproj('perspective')
 view(-27,25)
+axis equal
 
 % close all;
 
@@ -122,15 +123,22 @@ for i=1:nNewPlanes
 end
 camproj('perspective')        
 view(-27,25)
+axis equal
 toc
 
 %% Další iterace
 disp('Druhá iterace')
 tic
 secondIteration = CatmullClarkSubdivide(newShape,true);
+camproj('perspective')  
+view(-27,25)
+axis equal
 toc
 
 disp('Tøetí iterace')
 tic
 thirdIteration = CatmullClarkSubdivide(secondIteration,true);
+camproj('perspective')  
+view(-27,25)
+axis equal
 toc

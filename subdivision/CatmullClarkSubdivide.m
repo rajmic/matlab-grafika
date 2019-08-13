@@ -37,8 +37,6 @@ figure()
 for i=1:nNewPlanes
    patch(newShape(:,1,i),newShape(:,2,i),newShape(:,3,i),'red');    
 end
-camproj('perspective')  
-view(-27,25)
 
 end
 
