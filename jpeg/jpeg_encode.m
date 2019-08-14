@@ -1,23 +1,33 @@
-function [bitstream, RSseries, bity, DCseries] = jpeg_encode(image, Qmtx, htaclum, htdclum)
+function [bitstream, RSseries, bity, DCseries] = jpeg_encode(image, Qmtx, htaclum, htdclum, param)
 
 % Kódování JPEG obrazu ve stupních šedi
 %
-% image........vstupní obraz (predpoklada se 8bitova hloubka)
-% Qmtx.........kvantovaci matice
-% htaclum......Huffmanova tabulka pro kódování AC luminancnich slozek
-% htdclum......Huffmanova tabulka pro kódování DC luminancni slozky
+% image.........vstupní obraz (predpoklada se 8bitova hloubka)
+% Qmtx..........kvantovaci matice
+% htaclum.......Huffmanova tabulka pro kódování AC luminancnich slozek
+% htdclum.......Huffmanova tabulka pro kódování DC luminancni slozky
 % 
-% bitstream....vysledny bitovy tok
-% RSseries.....posloupnost znacek R|S
-% bity.........posloupnost bitovych vyjadreni cisel v paru s R|S
-% DC series....posloupnost DC slozek
+% bitstream.....vysledny bitovy tok
+% RSseries......posloupnost znacek R|S
+% bity..........posloupnost bitovych vyjadreni cisel v paru s R|S
+% DC series.....posloupnost DC slozek
 % % % q_transform..kvantovana matice DCT
+% param.verbose..zda se maji vypisovat meziinformace (ktery blok se
+%                aktualne zpracovava apod.) .... volitelne, default = true
 %
 % Obraz je ve stupnich sedi, 8 bpp
 % DC slozka se koduje diferencne, pro kazdy radek zvlast bez navaznosti
 
-% (c) 2010-2016 Pavel Rajmic, Jiøí Štefek, Jakub Hejda, UTKO FEKT VUT v Brne
+% (c) 2010-2019 Pavel Rajmic, Jiøí Štefek, Jakub Hejda, UTKO FEKT VUT v Brne
 
+
+%% Kontrola volitelnych parametru
+if ~exist('param','var')
+    param = struct; %structure with no fields (necessary for correct further processing)
+end
+if ~isfield(param,'verbose')
+    param.verbose = true;
+end
 
 %% Kontrola formalnich pozadavku na obraz
 % Je ve stupnich sedi?
@@ -60,7 +70,9 @@ for cnt_ver = 0:(no_blocks_ver-1)
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
     for cnt_hor = 0:(no_blocks_hor-1)
-        disp(['Kodovani bloku na pozici ' num2str([cnt_ver+1 cnt_hor+1])]);
+        if param.verbose
+            disp(['Kodovani bloku na pozici ' num2str([cnt_ver+1 cnt_hor+1])]);
+        end
         %vyber aktualniho bloku ke zpracovani
         block = image(8*cnt_ver+1:8*cnt_ver+8 , 8*cnt_hor+1:8*cnt_hor+8);
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %

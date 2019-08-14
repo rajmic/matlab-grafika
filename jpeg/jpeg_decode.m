@@ -1,4 +1,4 @@
-function [ image ] = jpeg_decode( bitstream, Qmtx, htaclum, htdclum,dimx, dimy)
+function [ image ] = jpeg_decode(bitstream, Qmtx, htaclum, htdclum, dimx, dimy, param)
 %JPEG_DECODE Dekoder formatu jpeg
 %   Dekoduje obrazek z bitoveho toku formatu jpeg do hrubych dat
 %bitstream                  bitova posloupnost kodu obrazku v jpeg
@@ -6,13 +6,26 @@ function [ image ] = jpeg_decode( bitstream, Qmtx, htaclum, htdclum,dimx, dimy)
 %htaclum                    huffmanova tabulka pro AC slozku
 %htdclum                    huffmanova tabulka pro DC slozku
 %dimx a dimy              x a y rozmery obrazku
+%param.verbose............zda se maji vypisovat meziinformace (ktery blok se
+%                aktualne zpracovava apod.) .... volitelne, default = true
+%
 %
 %funkce vrati dekodovany obrazek, pocita s jednokanalovym obrazkem ve
 %stupnich sedi. Dale nepocita s jpeg hlavickou, proto jsou tyto informace 
 %predavany pomoci parametru
 
-% (c) 2015-2016 Jakub Hejda, Pavel Rajmic, UTKO FEKT VUT v Brne
+% (c) 2015-2019 Jakub Hejda, Pavel Rajmic, UTKO FEKT VUT v Brne
 
+
+%% Kontrola volitelnych parametru
+if ~exist('param','var')
+    param = struct; %structure with no fields (necessary for correct further processing)
+end
+if ~isfield(param,'verbose')
+    param.verbose = true;
+end
+
+%% Inicializace
 str = '';
 num = 0;
 DCvector = [];
@@ -159,7 +172,9 @@ while cnt <= length(bitstream)
         im = im + 128;
         im = uint8(im); %timto zaroven dojde k pripadnemu orezani rozsahu na [0, 255]
         
-        disp(['Byl dekodovan blok ' num2str(block_no)])
+        if param.verbose
+            disp(['Byl dekodovan blok ' num2str(block_no)])
+        end
         block_no = block_no +1;
         
         %ziskavani radku bloku tvoricich obrazek

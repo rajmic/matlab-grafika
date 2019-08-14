@@ -7,6 +7,7 @@ home;
 close all
 % clear variables
 % clear all;
+param.verbose = true; %false; %zda se maji vypisovat meziinformace z koderu/dekoderu
 
 %% kvalita [0,100]
 %kvalita 100 jeste neznamena bezeztratovost -- kvantizace DCT ma za dusledek zaokrouhlovaci chyby
@@ -25,7 +26,7 @@ htdclum = huffman_table_dc_lum();
 
 %% kodovani
 disp(['Zahajeni kodovani...'])
-[bitstream, RSseries, bity] = jpeg_encode(image, Qmtx, htaclum, htdclum);
+[bitstream, RSseries, bity] = jpeg_encode(image, Qmtx, htaclum, htdclum, param);
 
 %% vypis
 disp(' ')
@@ -37,7 +38,7 @@ disp(' ')
 disp('Zahajeni dekodovani...')
 
 %% dekodovani
-[ image_recon ] = jpeg_decode( bitstream, Qmtx, htaclum, htdclum, dim_horiz, dim_vert);
+[ image_recon ] = jpeg_decode(bitstream, Qmtx, htaclum, htdclum, dim_horiz, dim_vert, param);
 
 %% PSNR
 MSEr = norm(double(image-image_recon),'fro')^2 / dim_vert / dim_horiz;
