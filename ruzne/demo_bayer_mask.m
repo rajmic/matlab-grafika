@@ -37,6 +37,7 @@ green2 = zeros(rows, columns, 'uint8'); %zelene jsou dva
 blue = zeros(rows, columns, 'uint8');
 
 %v tomto cyklu se prochazeji vsechny pixely a rozhoduje se, ktere masce patri
+%maska odpovida usporadani 'bggr' 
 for col = 1 : columns
   for row = 1 : rows
     if mod(col, 2) == 0 && mod(row, 2) == 0
@@ -62,9 +63,9 @@ figure
 imshow(recombinedRGBImage);
 title('Bayer RGB');
 
-recombinedRGBImage = cat(3, red, green, blue); %pak jako barvicky
+recombinedRGBImage_color = cat(3, red, green, blue); %pak jako barvicky
 figure
-imshow(recombinedRGBImage);
+imshow(recombinedRGBImage_color);
 title('Bayer RGB');
 
 % Cerveny Bayer kanal zvlast
@@ -84,7 +85,7 @@ title('Bayer B');
 
 
 %% Demozaikování bayerovy masky
-demosaicedImage = demosaic(mosaicedImage,'bggr');  %funkce Image Processing Toolboxu
+demosaicedImage = demosaic(recombinedRGBImage,'bggr');  %funkce Image Processing Toolboxu
 
 figure
 imshow(demosaicedImage);
@@ -92,6 +93,7 @@ title('Demosaiced image');
 
 % Vyhodnoceni odchylky demozaikovaneho obrazu od RGB
 Z = imabsdiff(rgbImage,demosaicedImage);
+norma_rozdilu = norm(double(Z(:)))
 % ZZ = abs(rgbImage-demosaicedImage); %pozor, jednoduche odecteni a abs. hodnota dava neco jineho kvuli preteceni aritmetiky
 figure
 coef = 3;
