@@ -127,6 +127,15 @@ figure
 imshow(coef * Z_);
 title(['Absolutni rozdil (zesileny ' num2str(coef) 'krat)']);
 
+% Porovnani mezi sebou
+Z__ = imabsdiff(demosaicedImage,demosaicedImage_);
+norma_rozdilu__ = norm(double(Z__(:)))
+
+figure
+imshow(coef * Z__);
+title(['Absolutni rozdil mezi dvema metodami (zesileny ' num2str(coef) 'krat)']);
+
+
 
 %%%%%%%%%%
 function myDemosaic = demosaic_own(img)
