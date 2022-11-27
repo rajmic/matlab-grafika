@@ -1,15 +1,15 @@
-Toto je knihovnièka funkcí urèená pøedevším pro podporu vıuky v pøedmìtech MGMP a BZSG.
+Toto je knihovniÄka funkcÃ­ urÄenÃ¡ pÅ™edevÅ¡Ã­m pro podporu vÃ½uky v pÅ™edmÄ›tech MPG a ZSG.
 
-Pro spuštìní demostraèních (demo_*.m) i jinıch funkcí nejprve spuste
+Pro spuÅ¡tÄ›nÃ­ demostraÄnÃ­ch (demo_*.m) i jinÃ½ch funkcÃ­ nejprve spusÅ¥te
 strartup_grafika.m
-kterı vytvoøí doèasné cesty do podadresáøù.
+kterÃ½ vytvoÅ™Ã­ doÄasnÃ© cesty do podadresÃ¡Å™Å¯.
 
-Autorem je (s pøispìním studentù jmenovanıch v souborech)
+Autorem je (s pÅ™ispÄ›nÃ­m studentÅ¯ jmenovanÃ½ch v souborech)
 Pavel Rajmic
-Ústav telekomunikací
-FEKT VUT v Brnì
-http://www.utko.feec.vutbr.cz/~rajmic
+Ãšstav telekomunikacÃ­
+FEKT VUT v BrnÄ›
+https://www.utko.fekt.vut.cz/~rajmic/
 
-Tyto soubory jsou šíøeny pod licencí
-Creative Commons BY-NC (uveïte autora-neuivejte komerènì)
+Tyto soubory jsou Å¡Ã­Å™eny pod licencÃ­
+Creative Commons BY-NC (uveÄte autora, neuÅ¾ivejte komerÄnÄ›)
 http://www.creativecommons.cz/licence-cc/varianty-licence/
